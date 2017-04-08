@@ -1,0 +1,70 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb, algorithm, fancyhdr, algorithmicx, algpseudocode}
+
+\newcommand{\m}{\mathbb}
+\newcommand{\B}{\mathcal}
+
+\newtheorem{name}{Printed output}[section]
+\newtheorem{mydef}{Definition}[section]
+\newtheorem{mylem}{Lemma}[section]
+\newtheorem{mythm}{Theorem}[section]
+\newtheorem{mycor}{Corollary}[section]
+
+\pagestyle{fancy}
+\setlength{\parindent}{0mm}
+\setlength{\headheight}{15.0pt}
+\lhead{Angus Gruen, u5561004}
+\rhead{Comparing $\m{R}^{eq}$ and $\m{R}^{halt}$}
+
+\begin{document}
+	\begin{mythm} \label{halt_eq_equaltity}
+		For a given computaition power $\Omega$, the halting problem is equivalent to the question, given two numbers $a, b \in \m{R}^{\Omega}$ is $a = b$?
+	\end{mythm}
+
+	This is a two step proof. First for simplicity assume that $a, b \in [0, 1]^{\Omega}$ but this proof will obviously generalise. For any $n \in \m N$ define $a_n$ to be the $n$'th digit of $a$ Let $\B Q$ be the following program. Which takes imputs $a, b \in [0, 1]^{\Omega}$
+
+	\begin{algorithm}
+		\caption{The algorithm $Q$}
+		\label{Q}
+		\begin{algorithmic}
+			\State acc = 1
+			\While {$a_{acc} \neq b_{acc}$}
+				\State acc += 1
+			\EndWhile
+			\If {$a_{acc} = b_{acc} + 1$}
+				\State acc += 1
+				\While {$a_{acc} = 0$ and $b_{acc} = 1$}
+					\State acc += 1
+				\EndWhile
+			\ElsIf {$a_{acc} = b_{acc} - 1$}
+				\State acc += 1
+				\While {$a_{acc} = 1$ and $b_{acc} = 0$}
+					\State acc += 1
+				\EndWhile
+			\EndIf
+			\State \Return {False}
+		\end{algorithmic}
+	\end{algorithm}
+	It should be clear that $Q$ will halt and return False if and only if $a \neq b$. Hence an Oracle to the Halting problem can deduce if two numbers are equal or not.
+
+	\vspace{2mm}
+
+	Next given a program $P$ and an input $I$ define the number $a$ by the following program $R$ which accepts an input $n \in N$ and outputs $a_n$.
+	\begin{algorithm}
+		\caption{The Algorithm $R$}
+		\label{R}
+		\begin{algorithmic}
+			\State{Run the program $P$ with input $I$}
+			\If {$P$ halts in under $n$ seconds}
+				\State \Return 1
+			\Else
+				\State \Return 0
+			\EndIf
+		\end{algorithmic}
+	\end{algorithm}
+	Then the program $P$ does not halt if and only if $a = 0$. Additionally, as $R$ and $P$ are both finite length programs, $a$ is certainly constructible. Therefore an Oracle that can deduce if two numbers are equal solves the halting problem.
+
+	\vspace{2mm}
+
+	This proves Theorem \ref{halt_eq_equaltity} for all $\Omega$ that allow for Algorithms \ref{Q} and \ref{R}. 
+\end{document}
