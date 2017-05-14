@@ -130,4 +130,12 @@ Define $C = C_0$ to be a Turing complete model of computation. We can then recur
 \bo{Computable Continuum Hypothesis:} Can there exist models of computation $L_1$ and $L_2$ with $\bb R^{L_1}\subset\bb R^{L_2}$, so that no $L_2$ computable surjections exist between $\bb N\ra\bb R^{L_1}$ and also $\bb R^{L_1}\ra \bb R^{L_2}$?
 
 
+\section{Further Stuff}
+We could generalize the notion of an alphabet to allow countable elements in an alphabet. This for instance could allow us to consider adding countable halting oracles onto a model of 
+computation. Since the number of such programs is still countable, we still only have a countable number of computable numbers in these models.
+
+Extending even further, we could consider uncountable alphabets. For instance, we have the first expressive uncountable language, which has a halting oracle for each countable halting level. If the continuum hypothesis is false, this cannot be the reals. I don't know whether this will give you the reals, assuming the continuum hypothesis, or other set theoretic axioms, to be true.
+
+There are oracles which are very different to the halting oracles we have considered. Take, for instance God's number $\ak$; it could be any non-computable number in $\bb R$. We could add on an oracle which allows us to compute $\ak$.
+
 \end{document}
