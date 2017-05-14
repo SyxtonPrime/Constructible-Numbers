@@ -18,51 +18,52 @@
 
 \begin{document}
 	\begin{mythm} \label{halt_eq_equaltity}
-		For a given computation power $\Omega$, the halting problem is equivalent to the question, given two numbers $a, b \in \m{R}^{\Omega}$ is $a = b$?
+		For a given computation model $L$, a halting program $H$ exists if an only if an equality program $E$ exists.
 	\end{mythm}
 
-	This is a two step proof. First for simplicity assume that $a, b \in [0, 1]^{\Omega}$ but this proof will obviously generalise. For any $n \in \m N$ define $a_n$ to be the $n$'th digit of $a$ Let $\B Q$ be the following program. Which takes imputs $a, b \in [0, 1]^{\Omega}$
+	This is a two step proof. For simplicity let $a, b$ be two computable numbers in $[0, 1]^{L}$ with corresponding programs $P_a$ and $P_b$. Let $\B Q$ be the following program taking inputs $P_a, P_b$
 
 	\begin{algorithm}
-		\caption{The algorithm $Q$}
+		\caption{The algorithm $Q(P_a, P_b)$}
 		\label{Q}
 		\begin{algorithmic}
 			\State acc = 1
-			\While {$a_{acc} \neq b_{acc}$}
+			\While {$P_a(acc) = P_b(acc)$}
 				\State acc += 1
 			\EndWhile
-			\If {$a_{acc} = b_{acc} + 1$}
+			\If {$P_a(acc) = P_b(acc) + 1$}
 				\State acc += 1
-				\While {$a_{acc} = 0$ and $b_{acc} = 1$}
+				\While {$P_a(acc) = 0$ and $P_b(acc) = 1$}
 					\State acc += 1
 				\EndWhile
-			\ElsIf {$a_{acc} = b_{acc} - 1$}
+			\ElsIf {$P_a(acc) = P_b(acc) - 1$}
 				\State acc += 1
-				\While {$a_{acc} = 1$ and $b_{acc} = 0$}
+				\While {$P_a(acc) = 1$ and $P_b(acc) = 0$}
 					\State acc += 1
 				\EndWhile
 			\EndIf
 			\State \Return {False}
 		\end{algorithmic}
 	\end{algorithm}
-	It should be clear that $Q$ will halt and return False if and only if $a \neq b$. Hence an Oracle to the Halting problem can deduce if two numbers are equal or not.
+
+	Clearly, $Q$ will halt and return False if and only if $a \neq b$. Hence $H(Q(P_a, P_b))$ is an equality function on $[0, 1]^{L}$.
 
 	\vspace{2mm}
 
-	Next given a program $P$ and an input $I$ define the number $a$ by the following program $R$ which accepts an input $n \in N$ and outputs $a_n$.
+	Next given a program $P$ and an input $I$ define the number $a$ by the following program $R$ which accepts an input $n \in N$.
 	\begin{algorithm}
-		\caption{The Algorithm $R$}
+		\caption{The Algorithm $R(n)$}
 		\label{R}
 		\begin{algorithmic}
 			\State{Run the program $P$ with input $I$}
-			\If {$P$ halts in under $n$ seconds}
+			\If {$P$ has halted before $n$ seconds}
 				\State \Return 1
 			\Else
 				\State \Return 0
 			\EndIf
 		\end{algorithmic}
 	\end{algorithm}
-	Then the program $P$ does not halt if and only if $a = 0$. Additionally, as $R$ and $P$ are both finite length programs, $a$ is certainly constructible. Therefore an Oracle that can deduce if two numbers are equal solves the halting problem.
+	Then the program $P$ does not halt on input $I$ if and only if $a = 0$. Hence $E(0, R)$ is a halting function.
 
 	\vspace{2mm}
 
