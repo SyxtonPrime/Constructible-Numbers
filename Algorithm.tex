@@ -1,0 +1,55 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb, algorithm, fancyhdr, algorithmicx, algpseudocode}
+
+\newcommand{\m}{\mathbb}
+\newcommand{\B}{\mathcal}
+
+\newtheorem{name}{Printed output}[section]
+\newtheorem{mydef}{Definition}[section]
+\newtheorem{mylem}{Lemma}[section]
+\newtheorem{mythm}{Theorem}[section]
+\newtheorem{mycor}{Corollary}[section]
+
+\pagestyle{fancy}
+\setlength{\parindent}{0mm}
+\setlength{\headheight}{15.0pt}
+\lhead{Angus Gruen, u5561004}
+\rhead{Defining an Model of Computation}
+
+\begin{document}
+
+	An algorithm is a finite length list of computations. 
+
+	\vspace{2mm}
+
+	A model of computation is a list of computations that an algorithm is allowed to use.
+
+	\vspace{2mm}
+
+	Some simple examples of models of computations are:
+	\textbf{
+	\begin{enumerate}
+		\item Inputs
+		\item If statments
+		\item For Loops
+		\item Memory Assignment
+	\end{enumerate}}
+	This is essesntially a turing machine. If we dropped the ability for Memory Assignment, we get a weaker model known as a Finite State Machine.
+	\textbf{
+	\begin{enumerate}
+		\item Inputs
+		\item If statments
+		\item For Loops
+	\end{enumerate}}
+	A interesting example of a model of computation is straight edge geometry defined by the following list of allowed computions 
+	\textbf{
+	\begin{enumerate}
+		\item You start with 2 points length 1 apart.
+		\item You can draw a straight line between any 2 points.
+		\item Given 2 points you can draw the circle centered at one point and passing through another.
+		\item You can add a point at an intersection of any two points.
+		\item You can extend any straight line into a ray.
+		\item You can output the distance between any two points along any line drawn between the points. 
+	\end{enumerate}}
+
+\end{document}
